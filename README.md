@@ -2,31 +2,32 @@
 
 ## Frontend / Mobile
 
-Expo (React Native framework) — builds web + iOS (+ Android) from one codebase
-Expo Router — file-based routing (replaces React Router)
-React + TypeScript — component logic and typing
-StyleSheet (React Native's built-in styling) or NativeWind (Tailwind-style classes for RN) — your choice, no separate CSS files
-React's built-in state (useState/useContext) — no Redux, no Zustand, no external state library
-Expo Go — app on your phone for live testing during development (no Apple Developer account needed yet)
+Expo (React Native) — web + iOS from one codebase
+Expo Router — file-based routing
+React + TypeScript
+StyleSheet or NativeWind — styling
+TanStack Query — server-data fetching/caching
+Plain React state (useState/useContext) — no Redux/Zustand
+Expo Go — live testing on your phone
 
 ## Backend
 
-Node.js + Express — REST API server
-TypeScript — same as frontend, shared types possible between client/server
-Cheerio (or a direct JSON API call, if the Dine On Campus site has one under the hood) — scraping dining hall menu data
-A scheduler for the scraper — node-cron (or your host's scheduled/cron job feature) to run scrapes periodically
+Node.js + Express — REST API
+TypeScript
+Cheerio (or direct JSON API, if one exists) — scraping
+node-cron (or host's scheduler) — periodic scrape jobs
 
 ## Database
 
-PostgreSQL — relational database
-Prisma — ORM + schema/migrations (replaces MikroORM)
-Prisma Studio — GUI for browsing/debugging your data
+PostgreSQL
+Prisma — ORM + migrations
+Prisma Studio — GUI
 
 ## Hosting / Deployment
 
-Vercel — hosting the Expo web build (and/or the frontend generally)
-Railway or Render — hosting the Express API + PostgreSQL database
+Vercel — frontend
+Railway or Render — API + database
 
 ## Version control / collaboration
 
-Git + GitHub — you already used this at NASA (via GitLab there, but same concepts)
+Git + GitHub
