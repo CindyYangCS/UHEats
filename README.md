@@ -126,7 +126,30 @@ UHEats/
 └── README.md
 ```
 
+## Contributing
+
+Don't push directly to `main`. Every change goes through a branch + pull request (keep changes small)
+
+1. `git checkout main && git pull` — start from the latest code
+2. `git checkout -b <branch-name>` — e.g. `add-dining-hall-list-screen`
+3. Make your changes, then:
+```bash
+   git add .
+   git commit -m "short description of the change"
+   git push -u origin <branch-name>
+```
+1. Open a pull request on GitHub, tag the other person as reviewer
+2. Once approved, merge it on GitHub
+3. Clean up locally:
+```bash
+   git checkout main
+   git pull
+   git branch -d <branch-name>
+```
+
 ## Notes
 
 - Each person on the team needs their **own** local PostgreSQL database — we are not sharing one database yet. Everyone's `.env` file is different and never gets committed to GitHub.
 - If you make changes to `backend/prisma/schema.prisma` (the file that defines our database tables), run `npx prisma migrate dev` again afterward to apply the changes to your local database.
+
+---
