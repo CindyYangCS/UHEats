@@ -4,7 +4,9 @@ import {Link} from "expo-router";
 export default function HomeScreen() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold" }}>UHEats</Text>
+      <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+        UHEats
+      </Text>
 
       <Link href="/calculate" style={styles.button}>
         Go to Calculate Screen
