@@ -1,12 +1,16 @@
 import express from "express";
+import restaurantsRouter from "./routes/restaurants.js";
+import foodItemsRouter from "./routes/foodItem.js";
 
 const app = express();
-const PORT = 4000;
+app.use(express.json());
 
-app.get("/api/health", (req, res) => {
+app.get("/api/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+app.use("/api/restaurants", restaurantsRouter);
+app.use("/api/foodItems", foodItemsRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(4000, () => {
+  console.log(`Server running on http://localhost:4000`);
 });
