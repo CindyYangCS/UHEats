@@ -5,6 +5,7 @@
 
 generator client {
   provider        = "prisma-client"
+  output = "../src/generated"
 }
 
 datasource db {
@@ -13,7 +14,7 @@ datasource db {
 
 model Restaurant {
   id        Int           @id @default(autoincrement())
-  name      String
+  name      String        @unique
   hours     DiningHours[]
   foodItems FoodItem[]
 }

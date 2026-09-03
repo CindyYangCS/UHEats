@@ -79,19 +79,28 @@ Put this single line inside it, replacing `<your-password>` with the password yo
 
 DATABASE_URL="postgresql://postgres:\<your-password>\@localhost:5432/uheats"
 
-### 6. Set up the database tables
-
-Still inside `backend`, run:
+### 6. Generate the Prisma Client (needed since generated files aren't included in the repo)
 ```bash
-npx prisma migrate dev --name init
+npx prisma generate
 ```
-This creates all the tables (dining halls, food items, etc.) in your local `uheats` database.
 
-You can double-check it worked by running:
+### 7. Apply all existing migrations to build your local tables
+```bash
+npx prisma migrate dev
+```
+This creates all the tables (`Restaurant`, `FoodItem`, `DiningHours`) in your local `uheats` database.
+
+### 8. Seed the database with starter data
+```bash
+npx prisma db seed
+```
+This populates your database with restaurants like Chick-fil-A and their menu items.
+
+### 9. Confirm it worked
 ```bash
 npx prisma studio
 ```
-This opens a browser window showing your (currently empty) database tables.
+This opens a browser window showing your database tables — you should see seeded restaurants and food items, not empty tables.
 
 ---
 
