@@ -4,40 +4,53 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider        = "prisma-client"
-  output = "../src/generated"
+  provider = "prisma-client"
+  output   = "../src/generated"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-model Restaurant {
-  id        Int           @id @default(autoincrement())
-  name      String        @unique
-  hours     DiningHours[]
-  foodItems FoodItem[]
+enum DiningCategory {
+  DINING_HALL
+  RESTAURANT
+  CAFE
+  MARKET
+  VENDING_MACHINE
+}
+
+model DiningLocation {
+  id           String         @id @default(uuid())
+  name         String         @unique
+  slug         String         @unique
+  buildingName String
+  hours        DiningHours[]
+  foodItems    FoodItem[]
+  category     DiningCategory
+  updatedAt    DateTime       @updatedAt
+}
+
+model DiningHours {
+  id        String   @id @default(uuid())
+  dayOfWeek Int
+  openTime  DateTime @db.Time
+  closeTime DateTime @db.Time
+
+  diningLocationId String
+  diningLocation   DiningLocation @relation(fields: [diningLocationId], references: [id], onDelete: Cascade)
 }
 
 model FoodItem {
-  id          Int    @id @default(autoincrement())
+  id          String   @id @default(uuid())
   name        String
   servingUnit String
   calories    Float
   protein     Float
   carbs       Float
   fat         Float
+  updatedAt   DateTime @updatedAt
 
-  restaurantId Int
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
-}
-
-model DiningHours {
-  id        Int    @id @default(autoincrement())
-  dayOfWeek Int
-  openTime  String
-  closeTime String
-
-  restaurantId Int
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  diningLocationId String
+  diningLocation   DiningLocation @relation(fields: [diningLocationId], references: [id], onDelete: Cascade)
 }
