@@ -1,18 +1,57 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
+import { View, StyleSheet, Text, Pressable, Image, ImageBackground } from "react-native";
 import { COLORS } from "../../lib/theme";
 import { DiningLocation } from "../../types/dining";
 import { getOpenStatus } from "../../lib/openStatus";
+import { getBrandGradient, getDiningImage } from "../../lib/diningImages";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface DiningCardProps {
   diningLocation: DiningLocation;
   cardWidth: number;
 }
 
+interface CardBackgroundProps {
+  diningLocation: DiningLocation;
+  style: any;
+  children: React.ReactNode;
+}
+
+function CardBackground({ diningLocation, style, children }: CardBackgroundProps) {
+  const { slug, category } = diningLocation;
+
+  if (category === 'DINING_HALL') {
+    return (
+      <ImageBackground
+        source={getDiningImage(slug)}
+        resizeMode="cover"
+        imageStyle={{ borderRadius: 16 }}
+        style={style}
+      >
+        {children}
+      </ImageBackground>
+    );
+  }
+
+  return (
+    <LinearGradient
+      colors={getBrandGradient(slug)}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={style}
+    >
+      {children}
+      <View style={styles.logoWrap}>
+        <Image source={getDiningImage(slug)} resizeMode="contain" style={styles.logo} />
+      </View>
+    </LinearGradient>
+  )
+}
+
 export default function DiningCard({ diningLocation, cardWidth }: DiningCardProps) {
   const [hovered, setHovered] = useState<boolean>(false);
   const { name, buildingName, category } = diningLocation;
+
   const showLocation = category !== 'DINING_HALL'
   const { isOpen, openStatusLabel } = getOpenStatus(diningLocation);
 
@@ -22,19 +61,15 @@ export default function DiningCard({ diningLocation, cardWidth }: DiningCardProp
       onHoverIn={() => setHovered(true)}
       onHoverOut={() => setHovered(false)}
     >
-      <LinearGradient
-        colors={['#5c0606', '#f01212']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+      <CardBackground
+        diningLocation={diningLocation}
         style={[styles.thumb, hovered && styles.thumbHovered]}
       >
         <View style={[styles.statusPill, !isOpen && styles.statusPillClosed]}>
           <View style={[styles.dot, !isOpen && styles.dotClosed]} />
-          <Text style={[styles.statusPillText, { color: COLORS.inkSoft }]}>
-            {openStatusLabel}
-          </Text>
+          <Text style={[styles.statusPillText, { color: COLORS.inkSoft }]}>{openStatusLabel}</Text>
         </View>
-      </LinearGradient>
+      </CardBackground>
 
       <Text style={styles.placeName}>{name}</Text>
       <Text style={styles.placeHours}>
@@ -51,6 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     padding: 12,
     justifyContent: 'flex-start',
+    overflow: 'hidden',
     boxShadow: '0px 6px 14px rgba(0, 0, 0, 0.1)',
     transform: [{ translateY: 0 }],
   },
@@ -96,5 +132,14 @@ const styles = StyleSheet.create({
     color: COLORS.inkSoft,
     textAlign: 'center',
     marginTop: 2,
+  },
+  logoWrap: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  logo: {
+    width: 90,
+    height: 90
   },
 });
