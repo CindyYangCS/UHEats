@@ -34,17 +34,19 @@ function CardBackground({ diningLocation, style, children }: CardBackgroundProps
   }
 
   return (
-    <LinearGradient
-      colors={getBrandGradient(slug)}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={style}
-    >
-      {children}
-      <View style={styles.logoWrap}>
-        <Image source={getDiningImage(slug)} resizeMode="contain" style={styles.logo} />
-      </View>
-    </LinearGradient>
+    <View style={[style, styles.gradientClip]}>
+      <LinearGradient
+        colors={getBrandGradient(slug)}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[StyleSheet.absoluteFill, styles.gradientContent]}
+      >
+        {children}
+        <View style={styles.logoWrap}>
+          <Image source={getDiningImage(slug)} resizeMode="contain" style={styles.logo} />
+        </View>
+      </LinearGradient>
+    </View>
   )
 }
 
@@ -142,4 +144,12 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90
   },
+  gradientClip: {
+    overflow: 'hidden',
+    borderRadius: 16,
+  },
+  gradientContent: {
+    padding: 12,
+    justifyContent: 'flex-start',
+},
 });
