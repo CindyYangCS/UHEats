@@ -1,5 +1,5 @@
 import express from "express";
-import restaurantsRouter from "./routes/restaurants.js";
+import diningLocationsRouter from "./routes/diningLocations.js";
 import foodItemsRouter from "./routes/foodItems.js";
 
 const app = express();
@@ -8,7 +8,7 @@ app.use(express.json());
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok" });
 });
-app.use("/api/restaurants", restaurantsRouter);
+app.use("/api/diningLocations", diningLocationsRouter);
 app.use("/api/foodItems", foodItemsRouter);
 
 app.listen(4000, () => {
