@@ -18,7 +18,7 @@ const LOCATIONS = [
   'Bauer College',
 ];
 
-export default function Restaurant() {
+export default function RestaurantSection() {
     const [activeLocation, setActiveLocation] = useState<string>('All Locations');
     const [visibleRestaurants, setVisibleRestaurants] = useState<DiningLocation[]>(restaurantsMock);
     const cardWidth = useGridCardWidth(restaurantsMock.length)
@@ -90,8 +90,6 @@ const styles = StyleSheet.create({
   },
  chipRow: {
     marginBottom: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     alignSelf: 'center',
   },
 });

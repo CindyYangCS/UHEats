@@ -20,7 +20,7 @@ export function getOpenStatus(diningLocation: DiningLocation): OpenStatus {
   const dayOfWeek = now.getDay();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-  const todaysHours = diningLocation.hours.find((h) => h.dayOfWeek === dayOfWeek);
+  const todaysHours = diningLocation.hours?.find((h) => h.dayOfWeek === dayOfWeek);
 
   let isOpen = false;
   if (todaysHours && todaysHours.openTime !== 'CLOSED') {

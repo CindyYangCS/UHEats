@@ -50,7 +50,7 @@ const diningHoursMock: DiningHours[] = [
       id: 'dining-hr-4',
       dayOfWeek: 4,
       openTime: '2:30 PM',
-      closeTime: '7:30:PM',
+      closeTime: '7:30 PM',
   },
   {
       id: 'dining-hr-5',
