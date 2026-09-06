@@ -13,7 +13,6 @@ function parseTimeString(timeString: string): Date {
   return date;
 }
 
-// 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 const standardHours = [
   { dayOfWeek: 0, openTime: parseTimeString("00:00"), closeTime: parseTimeString("00:00") }, // Sunday (Closed)
   { dayOfWeek: 1, openTime: parseTimeString("07:00"), closeTime: parseTimeString("19:00") }, // Monday
@@ -107,6 +106,10 @@ const diningLocations = [
   }
 ];
 
+// if already seeded db, this will error because the data already exists
+// follow these steps to update db:
+// reset your local db with `npx prisma migrate reset`
+// seed db with `npx prisma db seed`
 async function main() {
   console.log("Seeding database...");
 
