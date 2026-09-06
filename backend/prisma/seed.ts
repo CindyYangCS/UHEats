@@ -26,7 +26,7 @@ const standardHours = [
 const diningLocations = [
   {
     name: "Chick-fil-A",
-    buildingName: "Student Center South",
+    buildingName: "SC South",
     category: DiningCategory.RESTAURANT,
     hours: standardHours,
     foodItems: [
