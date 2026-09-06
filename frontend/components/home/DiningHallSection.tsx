@@ -7,16 +7,16 @@ import { useGridCardWidth } from "../../hooks/useGridCardWidth";
 export default function DiningHallSection() {
   const cardWidth = useGridCardWidth(diningHallsMock.length)
     return (
-        <View style={styles.section}>
-            <Text style={styles.sectionTitle}>
-                Dining Halls
-            </Text>
-            <View style={styles.cardGrid}>
-                {diningHallsMock.map((place) => (
-                    <DiningCard key={place.id} diningLocation={place} cardWidth={cardWidth} />
-                ))}
-            </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>
+          Dining Halls
+        </Text>
+        <View style={styles.cardGrid}>
+          {diningHallsMock.map((place) => (
+            <DiningCard key={place.id} diningLocation={place} cardWidth={cardWidth} />
+          ))}
         </View>
+      </View>
     )
 }
 

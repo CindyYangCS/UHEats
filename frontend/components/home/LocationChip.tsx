@@ -3,15 +3,15 @@ import { StyleSheet, Text, Pressable } from "react-native";
 import { COLORS } from "../../lib/theme";
 
 interface LocationChipProps {
-    buildingName: string;
-    active: boolean;
-    onPress: () => void;
+  buildingName: string;
+  active: boolean;
+  onPress: () => void;
 }
 
 export default function LocationChip({ buildingName, active, onPress }: LocationChipProps) {
-    const [hovered, setHovered] = useState<boolean>(false);
+  const [hovered, setHovered] = useState<boolean>(false);
 
- return (
+  return (
     <Pressable
       onPress={onPress}
       onHoverIn={() => setHovered(true)}

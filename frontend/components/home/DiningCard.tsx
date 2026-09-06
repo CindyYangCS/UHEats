@@ -6,41 +6,42 @@ import { DiningLocation } from "../../types/dining";
 import { getOpenStatus } from "../../lib/openStatus";
 
 interface DiningCardProps {
-    diningLocation: DiningLocation;
-    cardWidth: number;
+  diningLocation: DiningLocation;
+  cardWidth: number;
 }
 
 export default function DiningCard({ diningLocation, cardWidth }: DiningCardProps) {
-    const [hovered, setHovered] = useState<boolean>(false);
-    const { name, buildingName, category } = diningLocation;
-    const showLocation = category !== 'DINING_HALL'
-    const { isOpen, openStatusLabel } = getOpenStatus(diningLocation);
+  const [hovered, setHovered] = useState<boolean>(false);
+  const { name, buildingName, category } = diningLocation;
+  const showLocation = category !== 'DINING_HALL'
+  const { isOpen, openStatusLabel } = getOpenStatus(diningLocation);
 
-    return (
-        <Pressable
-        style={{ width: cardWidth }}
-        onHoverIn={() => setHovered(true)}
-        onHoverOut={() => setHovered(false)}
-        >
-          <LinearGradient
-              colors={['#5c0606', '#f01212']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={[styles.thumb, hovered && styles.thumbHovered]}
-          >
-              <View style={[styles.statusPill, !isOpen && styles.statusPillClosed]}>
-              <View style={[styles.dot, !isOpen && styles.dotClosed]} />
-              <Text style={[styles.statusPillText, { color: COLORS.inkSoft }]}>
-                  {openStatusLabel}
-              </Text>
-              </View>
-          </LinearGradient>
-          <Text style={styles.placeName}>{name}</Text>
-          <Text style={styles.placeHours}>
-            {showLocation ? `${buildingName}` : ''}
+  return (
+    <Pressable
+      style={{ width: cardWidth }}
+      onHoverIn={() => setHovered(true)}
+      onHoverOut={() => setHovered(false)}
+    >
+      <LinearGradient
+        colors={['#5c0606', '#f01212']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={[styles.thumb, hovered && styles.thumbHovered]}
+      >
+        <View style={[styles.statusPill, !isOpen && styles.statusPillClosed]}>
+          <View style={[styles.dot, !isOpen && styles.dotClosed]} />
+          <Text style={[styles.statusPillText, { color: COLORS.inkSoft }]}>
+            {openStatusLabel}
           </Text>
-        </Pressable>
-    )
+        </View>
+      </LinearGradient>
+
+      <Text style={styles.placeName}>{name}</Text>
+      <Text style={styles.placeHours}>
+        {showLocation ? `${buildingName}` : ''}
+      </Text>
+    </Pressable>
+  )
 }
 
 const styles = StyleSheet.create({

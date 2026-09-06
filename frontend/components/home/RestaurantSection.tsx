@@ -19,47 +19,47 @@ const LOCATIONS = [
 ];
 
 export default function RestaurantSection() {
-    const [activeLocation, setActiveLocation] = useState<string>('All Locations');
-    const [visibleRestaurants, setVisibleRestaurants] = useState<DiningLocation[]>(restaurantsMock);
-    const cardWidth = useGridCardWidth(restaurantsMock.length)
+  const [activeLocation, setActiveLocation] = useState<string>('All Locations');
+  const [visibleRestaurants, setVisibleRestaurants] = useState<DiningLocation[]>(restaurantsMock);
+  const cardWidth = useGridCardWidth(restaurantsMock.length)
 
-    useEffect(() => {
-      if (activeLocation === 'All Locations') {
-        setVisibleRestaurants(restaurantsMock);
-        return;
-      }
+  useEffect(() => {
+    if (activeLocation === 'All Locations') {
+      setVisibleRestaurants(restaurantsMock);
+      return;
+    }
 
-      const visRestaurants = restaurantsMock.filter((r) => r.buildingName === activeLocation);
-      setVisibleRestaurants(visRestaurants);
-    }, [activeLocation]);
+    const visRestaurants = restaurantsMock.filter((r) => r.buildingName === activeLocation);
+    setVisibleRestaurants(visRestaurants);
+  }, [activeLocation]);
 
-    return (
-      <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Restaurants</Text>
-    
-            <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={true}
-            style={styles.chipRow}
-            contentContainerStyle={{ gap: 10 }}
-            >
-            {LOCATIONS.map((loc) => (
-                <LocationChip
-                key={loc}
-                buildingName={loc}
-                active={loc === activeLocation}
-                onPress={() => setActiveLocation(loc)}
-                />
-            ))}
-            </ScrollView>
+  return (
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>Restaurants</Text>
 
-            <View style={styles.cardGrid}>
-              {visibleRestaurants.map((place) => (
-                  <DiningCard key={place.id} diningLocation={place} cardWidth={cardWidth} />
-              ))}
-            </View>
-        </View>
-    )
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={true}
+        style={styles.chipRow}
+        contentContainerStyle={{ gap: 10 }}
+      >
+        {LOCATIONS.map((loc) => (
+            <LocationChip
+            key={loc}
+            buildingName={loc}
+            active={loc === activeLocation}
+            onPress={() => setActiveLocation(loc)}
+            />
+        ))}
+      </ScrollView>
+
+      <View style={styles.cardGrid}>
+        {visibleRestaurants.map((place) => (
+            <DiningCard key={place.id} diningLocation={place} cardWidth={cardWidth} />
+        ))}
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -78,17 +78,13 @@ const styles = StyleSheet.create({
     marginBottom: 22,
     color: COLORS.ink,
   },
-  // Card grid — row + wrap + center means a short row (e.g. 2 dining halls)
-  // stays centered under the section title instead of hugging the left edge,
-  // and each card's width comes from the cardWidth calculated in HomeScreen
-  // so cards grow/shrink together as the window resizes (auto-fit behavior).
   cardGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     gap: 16,
   },
- chipRow: {
+  chipRow: {
     marginBottom: 20,
     alignSelf: 'center',
   },
