@@ -1,25 +1,11 @@
-import { useState } from "react";
-import { View, StyleSheet, Platform, Text, ScrollView, TouchableOpacity } from "react-native";
-import PlaceCard from "./PlaceCard";
+import { useEffect, useState } from "react";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import LocationChip from "./LocationChip";
-
-const MOCK_RESTAURANTS = [
-  {
-    id: 1,
-    name: 'Chick-fil-A',
-    hours: '6:00 AM - 6:00 PM'
-  },
-    {
-    id: 2,
-    name: 'Panda Express',
-    hours: '7:00 AM - 7:00 PM'
-  },
-      {
-    id: 3,
-    name: 'Burger Joint',
-    hours: '7:00 AM - 7:00 PM'
-  }
-]
+import DiningCard from "./DiningCard";
+import { COLORS } from "../../lib/theme";
+import { restaurantsMock } from "../../lib/mockData";
+import { DiningLocation } from "../../types/dining";
+import { useGridCardWidth } from "../../hooks/useGridCardWidth";
 
 const LOCATIONS = [
   'All Locations',
@@ -29,10 +15,23 @@ const LOCATIONS = [
   'Rec',
   'Welcome Center',
   'TDECU Stadium',
+  'Bauer College',
 ];
 
-export default function Restaurant({ cardWidth }: {cardWidth: number}) {
-    const [activeLocation, setActiveLocation] = useState('All Locations');
+export default function Restaurant() {
+    const [activeLocation, setActiveLocation] = useState<string>('All Locations');
+    const [visibleRestaurants, setVisibleRestaurants] = useState<DiningLocation[]>(restaurantsMock);
+    const cardWidth = useGridCardWidth(restaurantsMock.length)
+
+    useEffect(() => {
+      if (activeLocation === 'All Locations') {
+        setVisibleRestaurants(restaurantsMock);
+        return;
+      }
+
+      const visRestaurants = restaurantsMock.filter((r) => r.buildingName === activeLocation);
+      setVisibleRestaurants(visRestaurants);
+    }, [activeLocation]);
 
     return (
       <View style={styles.section}>
@@ -40,14 +39,14 @@ export default function Restaurant({ cardWidth }: {cardWidth: number}) {
     
             <ScrollView
             horizontal
-            showsHorizontalScrollIndicator={false}
+            showsHorizontalScrollIndicator={true}
             style={styles.chipRow}
             contentContainerStyle={{ gap: 10 }}
             >
             {LOCATIONS.map((loc) => (
                 <LocationChip
                 key={loc}
-                label={loc}
+                buildingName={loc}
                 active={loc === activeLocation}
                 onPress={() => setActiveLocation(loc)}
                 />
@@ -55,9 +54,9 @@ export default function Restaurant({ cardWidth }: {cardWidth: number}) {
             </ScrollView>
 
             <View style={styles.cardGrid}>
-            {MOCK_RESTAURANTS.map((place) => (
-                <PlaceCard key={place.id} name={place.name} cardWidth={cardWidth} showLocation={true} />
-            ))}
+              {visibleRestaurants.map((place) => (
+                  <DiningCard key={place.id} diningLocation={place} cardWidth={cardWidth} />
+              ))}
             </View>
         </View>
     )
@@ -77,7 +76,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.4,
     textAlign: 'center',
     marginBottom: 22,
-    color: 'black',
+    color: COLORS.ink,
   },
   // Card grid — row + wrap + center means a short row (e.g. 2 dining halls)
   // stays centered under the section title instead of hugging the left edge,

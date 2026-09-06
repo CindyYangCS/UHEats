@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { View, StyleSheet, Platform, Text, Pressable } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, Text, Pressable } from "react-native";
+import { COLORS } from "../../lib/theme";
 
 interface LocationChipProps {
-    label: string;
+    buildingName: string;
     active: boolean;
     onPress: () => void;
 }
 
-export default function LocationChip({ label, active, onPress }: LocationChipProps) {
-    const [isOpen, setIsOpen] = useState<boolean>(true);
-    const [hovered, setHovered] = useState(false);
-    const hours = 'Open until 6:00 PM';
+export default function LocationChip({ buildingName, active, onPress }: LocationChipProps) {
+    const [hovered, setHovered] = useState<boolean>(false);
 
  return (
     <Pressable
@@ -24,7 +22,7 @@ export default function LocationChip({ label, active, onPress }: LocationChipPro
         !active && hovered && styles.chipHovered,
       ]}
     >
-      <Text style={[styles.chipText, active && styles.chipTextActive]}>{label}</Text>
+      <Text style={[styles.chipText, active && styles.chipTextActive]}>{buildingName}</Text>
     </Pressable>
   );
 }
@@ -34,23 +32,23 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 20,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.chipBg,
     borderWidth: 1.5,
     borderColor: 'transparent',
   },
   chipActive: {
     backgroundColor: '#fff',
-    borderColor: 'red',
+    borderColor: COLORS.red,
   },
   chipHovered: {
-    backgroundColor: 'light-gray',
+    backgroundColor: COLORS.chipBgHover,
   },
   chipText: {
     fontSize: 13,
     fontWeight: '600',
-    color: 'gray',
+    color: COLORS.inkSoft,
   },
   chipTextActive: {
-    color: 'red',
+    color: COLORS.red,
   },
 });

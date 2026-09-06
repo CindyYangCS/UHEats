@@ -23,16 +23,46 @@ const foodItemsMock: FoodItem[] = [
 
 const diningHoursMock: DiningHours[] = [
   {
+      id: 'dining-hr-0',
+      dayOfWeek: 0,
+      openTime: '2:00 PM',
+      closeTime: '7:00 PM', // formatted DateTime => .toLocaleTimeString([], { timeStyle: 'short' })
+  },
+  {
       id: 'dining-hr-1',
       dayOfWeek: 1,
-      openTime: '2:30:00 PM',
-      closeTime: '7:00:00 PM', //.toLocaleTimeString()
+      openTime: '2:30 PM',
+      closeTime: '7:30 PM',
   },
   {
       id: 'dining-hr-2',
+      dayOfWeek: 2,
+      openTime: '2:30 PM',
+      closeTime: '7:30 PM',
+  },
+  {
+      id: 'dining-hr-3',
       dayOfWeek: 3,
-      openTime: '2:30:00 PM',
-      closeTime: '7:30:00 PM',
+      openTime: '2:30 PM',
+      closeTime: '7:30 PM',
+  },
+  {
+      id: 'dining-hr-4',
+      dayOfWeek: 4,
+      openTime: '2:30 PM',
+      closeTime: '7:30:PM',
+  },
+  {
+      id: 'dining-hr-5',
+      dayOfWeek: 5,
+      openTime: '2:30 PM',
+      closeTime: '7:30 PM',
+  },
+  {
+      id: 'dining-hr-6',
+      dayOfWeek: 6,
+      openTime: '2:30 PM',
+      closeTime: '7:30 PM',
   },
 ]
 
@@ -45,7 +75,7 @@ export const diningHallsMock: DiningLocation[] = [
     hours: diningHoursMock,
     foodItems: foodItemsMock,
     category: 'DINING_HALL',
-    updatedAt: '2026-09-05T23:25:00.000Z' //.toISOString()
+    updatedAt: '2026-09-05T23:25:00.000Z' // formatted DateTime => .toISOString()
   },
   {
   id: 'loc-5',
@@ -74,7 +104,7 @@ export const restaurantsMock: DiningLocation[] = [
   id: 'loc-2',
   name: 'Panda Express',
   slug: 'panda-express',
-  buildingName: 'Student Center South',
+  buildingName: 'SC South',
   hours: diningHoursMock,
   foodItems: foodItemsMock,
   category: 'RESTAURANT',
