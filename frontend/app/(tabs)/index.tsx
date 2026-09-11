@@ -1,7 +1,7 @@
 import { StyleSheet, ScrollView } from "react-native";
-import DiningHallSection from "../components/home/DiningHallSection";
-import RestaurantSection from "../components/home/RestaurantSection";
-import { COLORS } from "../lib/theme";
+import DiningHallSection from "../../components/home/DiningHallSection";
+import RestaurantSection from "../../components/home/RestaurantSection";
+import { COLORS } from "../../lib/theme";
 
 export default function HomeScreen() {
   return (
