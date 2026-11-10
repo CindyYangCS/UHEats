@@ -13,6 +13,13 @@ export const CATEGORY_LABELS: Record<DiningCategory, string> = {
   VENDING_MACHINE: 'Vending Machine',
 };
 
+export type FoodCategory = 
+  | 'Main'
+  | 'Side'
+  | 'Drink'
+  | 'Dessert'
+  | 'Other'
+
 export interface DiningHours {
     id: string;
     dayOfWeek: number;
@@ -23,6 +30,8 @@ export interface DiningHours {
 export interface FoodItem {
     id: string;
     name: string;
+    description?: string;
+    category?: FoodCategory;
     servingUnit: string;
     calories: number;
     protein: number;
