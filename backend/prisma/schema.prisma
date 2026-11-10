@@ -20,6 +20,14 @@ enum DiningCategory {
   VENDING_MACHINE
 }
 
+enum FoodCategory {
+  MAIN
+  SIDE
+  DRINK
+  DESSERT
+  OTHER
+}
+
 model DiningLocation {
   id           String         @id @default(uuid())
   name         String         @unique
@@ -44,6 +52,8 @@ model DiningHours {
 model FoodItem {
   id          String   @id @default(uuid())
   name        String
+  description String?
+  category    FoodCategory?
   servingUnit String
   calories    Float
   protein     Float
