@@ -17,10 +17,14 @@ export const BRAND_GRADIENTS: Record<string, [string, string]> = {
 }
 
 const FALLBACK_GRADIENT: [string, string] = ['#ca7e8d', '#942f45'];
-const FALLBACK_IMAGE: ImageSourcePropType = require('../assets/icon.png');
+const FALLBACK_IMAGE: ImageSourcePropType = require('../assets/foodanddrink.jpg');
 
 export function getDiningImage(slug: string): ImageSourcePropType {
   return DINING_IMAGES[slug] ?? FALLBACK_IMAGE;
+}
+
+export function getFoodImage(slug: string, foodName: string): ImageSourcePropType {
+  return FALLBACK_IMAGE;
 }
 
 export function getBrandGradient(slug: string): [string, string] {

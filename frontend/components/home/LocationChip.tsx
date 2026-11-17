@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   chipActive: {
     backgroundColor: '#fff',
-    borderColor: COLORS.red,
+    borderColor: COLORS.nord11,
   },
   chipHovered: {
     backgroundColor: COLORS.chipBgHover,
@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     color: COLORS.inkSoft,
   },
   chipTextActive: {
-    color: COLORS.red,
+    color: COLORS.nord11,
   },
 });
