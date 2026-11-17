@@ -1,8 +1,12 @@
 import express from "express";
 import diningLocationsRouter from "./routes/diningLocations.js";
 import foodItemsRouter from "./routes/foodItems.js";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors({ origin: "http://localhost:8081" }));
+
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {

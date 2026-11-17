@@ -3,9 +3,9 @@ import { View, StyleSheet, Text, ScrollView } from "react-native";
 import LocationChip from "./LocationChip";
 import DiningCard from "./DiningCard";
 import { COLORS } from "../../lib/theme";
-import { restaurantsMock } from "../../lib/mockData";
 import { DiningLocation } from "../../types/dining";
 import { useGridCardWidth } from "../../hooks/useGridCardWidth";
+import { router } from "expo-router";
 
 const LOCATIONS = [
   'All Locations',
@@ -18,20 +18,20 @@ const LOCATIONS = [
   'Bauer College',
 ];
 
-export default function RestaurantSection() {
+export default function RestaurantSection({ locations }: { locations: DiningLocation[] }) {
   const [activeLocation, setActiveLocation] = useState<string>('All Locations');
-  const [visibleRestaurants, setVisibleRestaurants] = useState<DiningLocation[]>(restaurantsMock);
-  const cardWidth = useGridCardWidth(restaurantsMock.length)
+  const [visibleRestaurants, setVisibleRestaurants] = useState<DiningLocation[]>(locations);
+  const cardWidth = useGridCardWidth(locations.length)
 
   useEffect(() => {
     if (activeLocation === 'All Locations') {
-      setVisibleRestaurants(restaurantsMock);
+      setVisibleRestaurants(locations);
       return;
     }
 
-    const visRestaurants = restaurantsMock.filter((r) => r.buildingName === activeLocation);
+    const visRestaurants = locations.filter((r) => r.buildingName === activeLocation);
     setVisibleRestaurants(visRestaurants);
-  }, [activeLocation]);
+  }, [activeLocation, locations]);
 
   return (
     <View style={styles.section}>
@@ -55,7 +55,12 @@ export default function RestaurantSection() {
 
       <View style={styles.cardGrid}>
         {visibleRestaurants.map((place) => (
-            <DiningCard key={place.id} diningLocation={place} cardWidth={cardWidth} />
+            <DiningCard
+              key={place.id}
+              diningLocation={place}
+              cardWidth={cardWidth}
+              onPress={() => router.push(`/menu/${place.slug}`)}
+            />
         ))}
       </View>
     </View>
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     paddingHorizontal: 20,
-    paddingTop: 44,
+    paddingTop: 22,
   },
   sectionTitle: {
     fontSize: 24,
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 16,
+    gap: 12,
   },
   chipRow: {
     marginBottom: 20,

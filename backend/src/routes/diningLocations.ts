@@ -12,7 +12,15 @@ router.get("/", async (_req, res) => {
         slug: true,
         category: true,
         buildingName: true,
+        hours: {
+          orderBy: {
+            dayOfWeek: "asc",
+          },
+        },
       },
+      orderBy: {
+        name: "asc",
+      }
     });
     res.status(200).json(result);
   } catch (err) {
@@ -52,7 +60,7 @@ router.get("/:slug/menu", async (req, res) => {
   try {
     const result = await prisma.diningLocation.findUnique({
       where: { slug },
-      select: { id: true, name: true, slug: true, foodItems: true },
+      select: { name: true, slug: true, foodItems: true },
     });
 
     if (!result) {

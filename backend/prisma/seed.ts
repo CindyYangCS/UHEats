@@ -1542,7 +1542,7 @@ const diningLocations = [
   },
   {
     name: "Absurd Bird",
-    buildingName: "RAD",
+    buildingName: "RAD Center",
     category: DiningCategory.RESTAURANT,
     hours: standardHours,
     foodItems: [
@@ -1794,7 +1794,7 @@ const diningLocations = [
   },
   {
     name: "Taco Stand",
-    buildingName: "RAD",
+    buildingName: "RAD Center",
     category: DiningCategory.CAFE,
     hours: standardHours,
     foodItems: [
@@ -2040,7 +2040,7 @@ const diningLocations = [
   },
   {
     name: "Paper Lantern",
-    buildingName: "RAD",
+    buildingName: "RAD Center",
     category: DiningCategory.RESTAURANT,
     hours: standardHours,
     foodItems: [
@@ -2207,7 +2207,7 @@ const diningLocations = [
   },
   {
     name: "Burger Joint",
-    buildingName: "RAD",
+    buildingName: "RAD Center",
     category: DiningCategory.RESTAURANT,
     hours: standardHours,
     foodItems: [
@@ -2609,7 +2609,7 @@ const diningLocations = [
   },
   {
     name: "Katz Coffee",
-    buildingName: "RAD",
+    buildingName: "RAD Center",
     category: DiningCategory.CAFE,
     hours: standardHours,
     foodItems: [

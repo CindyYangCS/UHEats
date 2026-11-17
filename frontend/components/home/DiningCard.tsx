@@ -9,6 +9,7 @@ import { LinearGradient } from "expo-linear-gradient";
 interface DiningCardProps {
   diningLocation: DiningLocation;
   cardWidth: number;
+  onPress?: () => void;
 }
 
 interface CardBackgroundProps {
@@ -22,14 +23,16 @@ function CardBackground({ diningLocation, style, children }: CardBackgroundProps
 
   if (category === 'DINING_HALL') {
     return (
-      <ImageBackground
-        source={getDiningImage(slug)}
-        resizeMode="cover"
-        imageStyle={{ borderRadius: 16 }}
-        style={style}
-      >
-        {children}
-      </ImageBackground>
+      <View style={[style, styles.container]}>
+        <Image
+          source={getDiningImage(slug)}
+          resizeMode="cover"
+          style={[StyleSheet.absoluteFill, styles.backgroundImage]}
+        />
+        <View style={styles.imageContent}>
+          {children}
+        </View>
+      </View>
     );
   }
 
@@ -50,7 +53,7 @@ function CardBackground({ diningLocation, style, children }: CardBackgroundProps
   )
 }
 
-export default function DiningCard({ diningLocation, cardWidth }: DiningCardProps) {
+export default function DiningCard({ diningLocation, cardWidth, onPress }: DiningCardProps) {
   const [hovered, setHovered] = useState<boolean>(false);
   const { name, buildingName, category } = diningLocation;
 
@@ -60,6 +63,7 @@ export default function DiningCard({ diningLocation, cardWidth }: DiningCardProp
   return (
     <Pressable
       style={{ width: cardWidth }}
+      onPress={onPress}
       onHoverIn={() => setHovered(true)}
       onHoverOut={() => setHovered(false)}
     >
@@ -151,5 +155,20 @@ const styles = StyleSheet.create({
   gradientContent: {
     padding: 12,
     justifyContent: 'flex-start',
-},
+  },
+  container: {
+    position: 'relative', 
+    overflow: 'hidden', 
+    borderRadius: 16,
+    padding: 0,
+  },
+  backgroundImage: {
+    width: '100.5%',
+    height: '100.5%',
+  },
+  imageContent: {
+    flex: 1,
+    padding: 12,
+    justifyContent: 'flex-start',
+  },
 });
